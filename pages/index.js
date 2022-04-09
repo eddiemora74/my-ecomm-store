@@ -1,8 +1,10 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import Image from "next/image";
+import styles from "../styles/Home.module.css";
 
 import products from "../products.json";
+
+import { initiatePayment } from "../lib/payments";
 
 export default function Home() {
   return (
@@ -13,16 +15,14 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Space Jelly Shop
-        </h1>
+        <h1 className={styles.title}>Space Jelly Shop</h1>
 
         <p className={styles.description}>
           The best space jelly shop in the <em>universe!</em>
         </p>
 
         <ul className={styles.grid}>
-          {products.map(product => {
+          {products.map((product) => {
             const { id, title, description, image, price } = product;
             return (
               <li key={id} className={styles.card}>
@@ -32,8 +32,20 @@ export default function Home() {
                   <p>$ {price.toFixed(2)}</p>
                   <p>{description}</p>
                 </a>
+                <p>
+                  <button
+                    className={styles.button}
+                    onClick={() =>
+                      initiatePayment({
+                        lineItems: [{ price: id, quantity: 1 }],
+                      })
+                    }
+                  >
+                    Buy Now!
+                  </button>
+                </p>
               </li>
-            )
+            );
           })}
         </ul>
       </main>
@@ -44,12 +56,12 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
+  );
 }
