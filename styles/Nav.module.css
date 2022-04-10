@@ -1,0 +1,27 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.button {
+    padding: 0.5em 1.1em;
+    font-weight: 700;
+    color: blueviolet;
+    font-size: 1.2em;
+    background-color: transparent;
+    outline: transparent;
+    border-color: transparent;
+    cursor: pointer;
+}
+
+.button a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button svg {
+    margin-right: 10px;
+}
